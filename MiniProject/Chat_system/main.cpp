@@ -6,11 +6,15 @@
 
 using namespace std;
 
+cin>> // input
+cout<< // output
+
 int main() // main function used for the server
 {
+int server;
 
 }
 
 struct structure{
 
-} // data structure block
+} // data structure block for sockets
