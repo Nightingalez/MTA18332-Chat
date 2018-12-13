@@ -10,14 +10,13 @@ int client; // integer variable for the client/user
 
 cin>>client; // inputing the variable for the user into the console
 
+void main()
+{
+ int socket; // integer variable for the socket
+ struct sockaddr_in server_address; // struct variable for the socket
  struct structure{
 
-
-} // data structure block for sockets
-
-int main()
-{
-
+} // nested data structure used for sockets
 }
 
 // the main function of this part of the project
