@@ -4,17 +4,16 @@
 #include <vector> // library used for vectors
 #include <winsock2.h> // library used for sockets
 
-using namespace std;
+int client;
 
-cin>> // input
-cout<< // output
+cin>>client;
 
-int main() // main function used for the server
-{
-int server;
+ struct structure{
 
-}
-
-struct structure{
 
 } // data structure block for sockets
+
+int main()
+{
+
+}
