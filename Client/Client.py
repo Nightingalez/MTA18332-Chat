@@ -77,6 +77,3 @@ client_socket.connect(address)
 receive_thread = Thread(target=receive)
 receive_thread.start()
 _tkinter.mainloop() # Starts up the GUI
-
-
-
