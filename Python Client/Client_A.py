@@ -16,8 +16,9 @@ def msgRecieve():
 '''This function sends the messeges'''
 def msgSend(event = None):
     msg = myMsg.get()
-    myMsg.set("")
+    myMsg.set("") #The place where the user writes the messege
     client_socket.send(bytes(msg, "utf8"))
+    #This if- statement checks if {Quit} is written; if it is, it stops the client
     if msg == "{Quit}":
         client_socket.close()
         top.quit()
@@ -29,12 +30,12 @@ def scktClose(event = None):
 
 '''GUI build'''
 
-top = tkinter.Tk() #Defines a Tkinter Top-level Widget
-top.title("Chat") #Sets the title for it
+top = tkinter.Tk() #Defines a Tkinter Top-level Widget (the chat window)
+top.title("Simple Chat") #Sets the title for the chat window
 
 msgFrame = tkinter.Frame(top) #Groups all other widgets into a complex layout
-myMsg = tkinter.StringVar() #A Tkinter string which holds the message that is sent
-myMsg.set("Type a message")
+myMsg = tkinter.StringVar() #A string which holds the username and the messages that are sent
+myMsg.set("Enter username/message") #Setting the username
 sb = tkinter.Scrollbar(msgFrame) #Creates a scrollbar for the frame, so the user can navigate through previous messages
 
 msgList = tkinter.Listbox(msgFrame, height = 30, width = 60, yscrollcommand = sb.set) #Defines a message list, which will hold the messeges
@@ -43,7 +44,7 @@ msgList.pack(side = tkinter.LEFT, fill = tkinter.BOTH) #Placement of the list
 msgList.pack()
 msgFrame.pack()
 
-chatEntry = tkinter.Entry(top, textvariable = myMsg)
+chatEntry = tkinter.Entry(top, textvariable = myMsg) #Messege box
 chatEntry.bind("<Return>", msgSend) #Sends the message when the user presses Return/Enter
 chatEntry.pack()
 sendButton = tkinter.Button(top, text = "Send message", command = msgSend) #Creates a "Send message" button in case the user wants to use a button
@@ -53,11 +54,11 @@ top.protocol("WM_DELETE_WINDOW", scktClose)
 
 '''Connecting the client to the server'''
 
-HOST = input('Enter host (IP): ')
-PORT = input('Enter port: ')
+HOST = input('Enter host (IP): ') #Server IP as an input
+PORT = input('Enter port: ') #Server port as an input
 
 if not PORT:
-    PORT = 33000 #This is the default value for the port
+    PORT = 33000 #Default value for the port
 else:
     PORT = int(PORT)
 
