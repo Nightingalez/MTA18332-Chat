@@ -2,7 +2,7 @@ from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 
 clients = {}
-adresses = {}
+addresses = {}
 
 HOST = ''
 PORT = 33000
@@ -14,11 +14,11 @@ SERVER.bind(ADDR)
 def accept_incoming_connections():
 
     while True:
-        client, client_adress = SERVER.accept()
-        print("%s:%s has connected." % client_adress)
+        client, client_addresses = SERVER.accept()
+        print("%s:%s has connected." % client_addresses)
         client.send(bytes("Greetings from the cave!" + "Now type your name and press enter!", "utf8"))
 
-        adresses[client] = client_adress
+        addresses[client] = client_addresses
         Thread(target=handle_client, args=(client,)).start()
 
 def handle_client(client): #Takes the client's socket as an argument

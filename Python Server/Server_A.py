@@ -12,6 +12,7 @@ SERVER = socket(AF_INET, SOCK_STREAM)
 SERVER.bind(ADDR)
 
 def accept_incoming_connections():
+
     while True:
         client, client_address = SERVER.accept()
         print("%s:%s has connected." % client_address)
