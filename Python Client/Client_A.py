@@ -63,8 +63,8 @@ else:
 
 BUFSIZ = 1024
 ADDR = (HOST, PORT)
-client_scoket = socket(AF_INET, SOCK_STREAM)
-client_scoket.connect(ADDR)
+client_socket = socket(AF_INET, SOCK_STREAM)
+client_socket.connect(ADDR)
 
 receive_thread = Thread(target = msgRecieve)
 receive_thread.start()
