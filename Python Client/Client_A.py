@@ -37,13 +37,13 @@ myMsg = tkinter.StringVar() #A Tkinter string which holds the message that is se
 myMsg.set("Type a message")
 sb = tkinter.Scrollbar(msgFrame) #Creates a scrollbar for the frame, so the user can navigate through previous messages
 
-msgList = tkinter.Listbox(msgFrame, height = 30, width = 60, scrollcmd = sb.set) #Defines a message list, which will hold the messeges
+msgList = tkinter.Listbox(msgFrame, height = 30, width = 60, yscrollcommand = sb.set) #Defines a message list, which will hold the messeges
 sb.pack(side = tkinter.RIGHT, fill = tkinter.Y) #Placement of the scrollbar
 msgList.pack(side = tkinter.LEFT, fill = tkinter.BOTH) #Placement of the list
 msgList.pack()
 msgFrame.pack()
 
-chatEntry = tkinter.Entry(top, textvaraible = myMsg)
+chatEntry = tkinter.Entry(top, textvariable = myMsg)
 chatEntry.bind("<Return>", msgSend) #Sends the message when the user presses Return/Enter
 chatEntry.pack()
 sendButton = tkinter.Button(top, text = "Send message", command = msgSend) #Creates a "Send message" button in case the user wants to use a button
@@ -53,7 +53,7 @@ top.protocol("WM_DELETE_WINDOW", scktClose)
 
 '''Connecting the client to the server'''
 
-HOST = input('Enter IP: ')
+HOST = input('Enter host (IP): ')
 PORT = input('Enter port: ')
 
 if not PORT:
