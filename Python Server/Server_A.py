@@ -43,7 +43,7 @@ def broadcast(msg, prefix=""): # prefix is for name identification
     for sock in clients:
         sock.send(bytes(prefix, "utf8") + msg)
 
-if __name__ == "__main___":
+if __name__== "__main__":
     SERVER.listen(5) # Listens for 6 connections at max.
     print("Waiting for connection...")
     ACCEPT_THREAD = Thread(target=accept_incoming_connections)
