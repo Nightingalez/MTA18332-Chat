@@ -13,8 +13,8 @@ def receive():
 def send(event=None):
     msg = my_message.get()
     my_message.set("")
-    client_socket.send(bytes(message, "utf8"))
-    if message = "{quit}":
+    client_socket.send(bytes(msg, "utf8"))
+    if msg == "{quit}":
         client_socket.close()
         top.quit()
 
@@ -28,7 +28,7 @@ top.title("Chatter")
 messages_frame = tkinter.Frame(top)
 my_message = tkinter.StringVar()
 my_message.set("Type your message: ")
-scrollbar = tkinter.Scrollbar(message_frame)
+scrollbar = tkinter.Scrollbar(messages_frame)
 
 message_list = tkinter.Listbox(messages_frame, height=15, width=50, yscrollcommand = scrollbar.set)
 scrollbar.pack(side = tkinter.RIGHT, fill = tkinter.Y)
@@ -53,7 +53,7 @@ if not PORT:
 else:
     PORT = int(PORT)
 
-BUFFSIZ = 1024
+BUFSIZ = 1024
 ADDR = (HOST, PORT)
 client_socket = socket(AF_INET, SOCK_STREAM)
 client_socket.connect(ADDR)
