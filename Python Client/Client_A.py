@@ -8,7 +8,7 @@ import tkinter
 def msgRecieve():
     while True:
         try:
-            msg = client_scoket.recv(BUFSIZ).decode("utf8") #Stops execution of the loop until a message is recieved
+            msg = client_socket.recv(BUFSIZ).decode("utf8") #Stops execution of the loop until a message is recieved
             msgList.insert(tkinter.END, msg) #A list which holds the recieved message
         except OSError:
             break
