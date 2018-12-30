@@ -8,7 +8,7 @@ import tkinter
 def msgRecieve():
     while True:
         try:
-            msg = client_socket.recv(BUFSIZ).decode("utf8") #Stops execution of the loop until a message is recieved
+            msg = clientSocket.recv(BUFSIZ).decode("utf8") #Stops execution of the loop until a message is recieved
             msgList.insert(tkinter.END, msg) #A list which holds the recieved message
         except OSError:
             break
@@ -17,10 +17,10 @@ def msgRecieve():
 def msgSend(event = None):
     msg = myMsg.get()
     myMsg.set("") #The place where the user writes the messege
-    client_socket.send(bytes(msg, "utf8"))
+    clientSocket.send(bytes(msg, "utf8"))
     #This if- statement checks if {Quit} is written; if it is, it stops the client
     if msg == "{Quit}":
-        client_socket.close()
+        clientSocket.close()
         top.quit()
 
 '''This function closes the socket before the GUI gets closed'''
@@ -54,19 +54,19 @@ top.protocol("WM_DELETE_WINDOW", scktClose)
 
 '''Connecting the client to the server'''
 
-HOST = input('Enter host (IP): ') #Server IP as an input
-PORT = input('Enter port: ') #Server port as an input
+serverHost = input('Enter host (IP): ') #Server IP as an input
+serverPort = input('Enter port: ') #Server port as an input
 
-if not PORT:
+if not serverPort:
     PORT = 33000 #Default value for the port
 else:
-    PORT = int(PORT)
+    PORT = int(serverPort)
 
-BUFSIZ = 1024
-ADDR = (HOST, PORT)
-client_socket = socket(AF_INET, SOCK_STREAM)
-client_socket.connect(ADDR)
+bufferSize = 1024
+addr = (serverHost, serverPort)
+clientSocket = socket(AF_INET, SOCK_STREAM)
+clientSocket.connect(addr)
 
-receive_thread = Thread(target = msgRecieve)
-receive_thread.start()
+recieveThread = Thread(target = msgRecieve)
+recieveThread.start()
 tkinter.mainloop() #Executes the GUI
