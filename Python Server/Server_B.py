@@ -4,17 +4,17 @@ from threading import Thread
 clients = {}
 addresses = {}
 
-HOST = ''
-PORT = 33000
-BUFSIZ = 1024
-ADDR = (HOST, PORT)
-SERVER = socket(AF_INET, SOCK_STREAM)
-SERVER.bind(ADDR)
+serverHost = ''
+serverPort = 33000
+bufferSize = 1024
+addr = (serverHost, serverPort)
+server = socket(AF_INET, SOCK_STREAM)
+server.bind(addr)
 
 def accept_incoming_connections():
 
     while True:
-        client, client_addresses = SERVER.accept()
+        client, client_addresses = server.accept()
         print("%s:%s has connected." % client_addresses)
         client.send(bytes("Greetings from the cave!" + "Now type your name and press enter!", "utf8"))
 
@@ -22,7 +22,7 @@ def accept_incoming_connections():
         Thread(target=handle_client, args=(client,)).start()
 
 def handle_client(client): #Takes the client's socket as an argument
-    name = client.recv(BUFSIZ).decode("utf8")
+    name = client.recv(bufferSize).decode("utf8")
     welcome = 'Welcome %s! If you ever want to quit, type {quit} to exit' % name
     client.send(bytes(welcome, "utf8"))
     msg = "%s has joined the chat!" % name
@@ -30,7 +30,7 @@ def handle_client(client): #Takes the client's socket as an argument
     clients[client] = name
 
     while True:
-        msg = client.recv(BUFSIZ)
+        msg = client.recv(bufferSize)
         if msg != bytes("{quit}", "utf8"):
             broadcast(msg, name+": ")
         else:
@@ -45,12 +45,12 @@ def broadcast(msg, prefix=""):
         sock.send(bytes(prefix, "utf8")+msg)
 
 if __name__== "__main__":
-    SERVER.listen(5)
+    server.listen(5)
     print("Waiting for connection...")
     ACCEPT_THREAD = Thread(target=accept_incoming_connections)
     ACCEPT_THREAD.start()
     ACCEPT_THREAD.join()
-    SERVER.close()
+    server.close()
 
 
 
